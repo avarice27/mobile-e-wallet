@@ -134,7 +134,7 @@ class HomePage extends StatelessWidget {
                       height: 2,
                     ),
                     Text(
-                      state.data.username.toString(),
+                      state.data.username ?? state.data.name ?? '',
                       style: blackTextStyle.copyWith(
                         fontSize: 20,
                         fontWeight: semiBold,
@@ -346,8 +346,10 @@ class HomePage extends StatelessWidget {
               ),
               HomeServiceItem(
                 iconUrl: 'assets/ic_withdraw.png',
-                title: 'Withdraw',
-                onTap: () {},
+                title: 'Toefl',
+                onTap: () {
+                  Navigator.pushNamed(context, '/service');
+                },
               ),
               HomeServiceItem(
                 iconUrl: 'assets/ic_more.png',

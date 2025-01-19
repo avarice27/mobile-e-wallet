@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:bank_sha_rafi/models/tips_model.dart';
 import 'package:bank_sha_rafi/services/auth_service.dart';
 import 'package:http/http.dart' as http;
+import 'package:bank_sha_rafi/shared/api_path.dart';
 
 class TipsService {
-  final String baseUrl = 'http://10.0.2.2:8000';
 
   Future<List<TipsModel>> getTips() async {
     try {

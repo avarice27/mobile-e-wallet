@@ -16,27 +16,55 @@ class UserModel {
   String? token;
   int? tokenExpiresIn;
   String? tokenType;
+  int? roleId;
+  String? nim;
 
-  UserModel(
-      {this.id,
-      this.name,
-      this.email,
-      this.username,
-      this.password,
-      this.emailVerifiedAt,
-      this.verified,
-      this.profilePicture,
-      this.ktp,
-      this.createdAt,
-      this.updatedAt,
-      this.balance,
-      this.cardNumber,
-      this.pin,
-      this.token,
-      this.tokenExpiresIn,
-      this.tokenType});
+  // Static role definitions matching SignUpFormModel
+  static const Map<int, String> roles = {
+    1: 'admin',
+    2: 'upnvj_student',
+    3: 'general',
+    4: 'high_school_student',
+  };
 
-  UserModel.fromJson(Map<String, dynamic> json) {
+  static dynamic getRoleDisplayName(dynamic roleName) {
+    switch (roleName) {
+      case 'admin':
+        return 'Admin';
+      case 'upnvj_student':
+        return 'Mahasiswa UPNVJ';
+      case 'general':
+        return 'Umum';
+      case 'high_school_student':
+        return 'Siswa SMA';
+      default:
+        return roleName;
+    }
+  }
+
+  UserModel({
+    this.id,
+    this.name,
+    this.email,
+    this.username,
+    this.password,
+    this.emailVerifiedAt,
+    this.verified,
+    this.profilePicture,
+    this.ktp,
+    this.createdAt,
+    this.updatedAt,
+    this.balance,
+    this.cardNumber,
+    this.pin,
+    this.token,
+    this.tokenExpiresIn,
+    this.tokenType,
+    this.roleId,
+    this.nim,
+  });
+
+  UserModel.fromJson(Map json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -54,10 +82,12 @@ class UserModel {
     token = json['token'];
     tokenExpiresIn = json['token_expires_in'];
     tokenType = json['token_type'];
+    roleId = json['role_id'] != null ? int.parse(json['role_id'].toString()) : null;
+    nim = json['nim'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+  Map toJson() {
+    final Map data = {};
     data['id'] = id;
     data['name'] = name;
     data['email'] = email;
@@ -75,6 +105,8 @@ class UserModel {
     data['token'] = token;
     data['token_expires_in'] = tokenExpiresIn;
     data['token_type'] = tokenType;
+    data['role_id'] = roleId?.toString();
+    data['nim'] = nim;
     return data;
   }
 
@@ -85,6 +117,8 @@ class UserModel {
     String? pin,
     String? password,
     int? balance,
+    int? roleId,
+    String? nim,
   }) =>
       UserModel(
         id: id,
@@ -104,5 +138,7 @@ class UserModel {
         token: token,
         tokenExpiresIn: tokenExpiresIn,
         tokenType: tokenType,
+        roleId: roleId ?? this.roleId,
+        nim: nim ?? this.nim,
       );
 }

@@ -79,7 +79,7 @@ class ProfilePage extends StatelessWidget {
                         height: 16,
                       ),
                       Text(
-                        'Shayna Hanna',
+                        state.data.name!,
                         style: blackTextStyle.copyWith(
                           fontSize: 18,
                           fontWeight: medium,

@@ -2,13 +2,14 @@ import 'dart:convert';
 
 import 'package:bank_sha_rafi/models/payment_method_model.dart';
 import 'package:bank_sha_rafi/models/topup_form_model.dart';
+import 'package:bank_sha_rafi/models/service_form_model.dart';
 import 'package:bank_sha_rafi/models/transaction_model.dart';
 import 'package:bank_sha_rafi/models/transfer_form_model.dart';
 import 'package:bank_sha_rafi/services/auth_service.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:bank_sha_rafi/shared/api_path.dart';
+import 'package:bank_sha_rafi/models/service_form_model.dart';
 class TransactionService {
-  final String baseUrl = 'http://10.0.2.2:8000';
 
   Future<List<PaymentMethodModel>> getPaymentMethods() async {
     try {
@@ -79,12 +80,33 @@ class TransactionService {
     }
   }
 
+  // buy services
+  Future<void> service(ServiceModel data) async {
+    try {
+      final token = await AuthService().getToken();
+
+      final res = await http.post(
+        Uri.parse('$baseUrl/service/buy'),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+        body: data.toJson(),
+      );
+
+      if (res.statusCode != 200) {
+        throw jsonDecode(res.body)['message'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<TransactionModel>> getTransactions() async {
     try {
       final token = await AuthService().getToken();
 
       final res = await http.get(
-        Uri.parse('$baseUrl/transactions'),
+        Uri.parse('$baseUrl/transaction'),
         headers: {
           'Authorization': 'Bearer $token',
         },
@@ -101,6 +123,29 @@ class TransactionService {
       }
 
       return throw jsonDecode(res.body)['message'];
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // get services with prices
+  Future<List<ServiceModel>> getServices() async {
+    try {
+      final token = await AuthService().getToken();
+
+      final res = await http.get(
+        Uri.parse('$baseUrl/service'),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (res.statusCode == 200) {
+        final responseData = ServiceResponse.fromJson(jsonDecode(res.body));
+        return responseData.data.services;
+      }
+
+      throw jsonDecode(res.body)['message'];
     } catch (e) {
       rethrow;
     }

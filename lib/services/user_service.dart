@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:bank_sha_rafi/models/user_model.dart';
 import 'package:bank_sha_rafi/services/auth_service.dart';
 import 'package:http/http.dart' as http;
+import 'package:bank_sha_rafi/shared/api_path.dart';
 
 class UserService {
-  final String baseUrl = 'http://10.0.2.2:8000';
 
   Future<List<UserModel>> getUsersByUsername(String username) async {
     try {

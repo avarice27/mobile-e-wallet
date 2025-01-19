@@ -5,6 +5,7 @@ import 'package:bank_sha_rafi/ui/pages/onboarding_page.dart';
 import 'package:bank_sha_rafi/ui/pages/pin_page.dart';
 import 'package:bank_sha_rafi/ui/pages/profile_edit_success_page.dart';
 import 'package:bank_sha_rafi/ui/pages/profile_page.dart';
+import 'package:bank_sha_rafi/ui/pages/service_page.dart';
 import 'package:bank_sha_rafi/ui/pages/sign_in_page.dart';
 import 'package:bank_sha_rafi/ui/pages/sign_up_page.dart';
 import 'package:bank_sha_rafi/ui/pages/sign_up_set_ktp_page.dart';
@@ -15,9 +16,11 @@ import 'package:bank_sha_rafi/ui/pages/topup_page.dart';
 import 'package:bank_sha_rafi/ui/pages/topup_success.dart';
 import 'package:bank_sha_rafi/ui/pages/transfer_page.dart';
 import 'package:bank_sha_rafi/ui/pages/transfer_success_page.dart';
+import 'package:bank_sha_rafi/ui/pages/service_success_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'blocs/auth/auth_bloc.dart';
+import 'blocs/service_form/service_form_bloc.dart';
 
 void main() => runApp(const MyApp());
 
@@ -33,6 +36,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UserBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ServiceBloc(),
         ),
       ],
       child: MaterialApp(
@@ -68,7 +74,8 @@ class MyApp extends StatelessWidget {
           '/topup-success': (context) => const TopupSuccessPage(),
           '/transfer': (context) => const TransferPage(),
           '/transfer-success': (context) => const TransferSuccessPage(),
-
+          '/service': (context) => const ServicePage(), 
+          '/service-success': (context) => const ServiceSuccessPage(),
           '/sign-out': (context) => const OnboardingPage(),
         },
       ),

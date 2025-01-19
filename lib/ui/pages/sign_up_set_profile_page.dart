@@ -24,7 +24,6 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
   final pinController = TextEditingController(text: '');
   XFile? selectedImage;
 
-
   // Future<XFile?> selectImage() async {
   //   final imagePicker = ImagePicker();
   //   final XFile? image = await imagePicker.pickImage(
@@ -34,7 +33,6 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
   //   return image;
   // }
 
-  
   bool validate() {
     if (pinController.text.length != 6) {
       return false;
@@ -121,7 +119,8 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
                   height: 16,
                 ),
                 Text(
-                  widget.data.name, // Use the name from the SignUpFormModel
+                  widget.data.name
+                      .toString(), // Use the name from the SignUpFormModel
                   style: blackTextStyle.copyWith(
                     fontSize: 18,
                     fontWeight: medium,

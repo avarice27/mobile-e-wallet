@@ -64,6 +64,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event is AuthLogin) {
         try {
           emit(AuthLoading());
+                  print(event.data);
 
           final res = await AuthService().login(event.data);
 

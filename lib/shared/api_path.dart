@@ -1,3 +1,2 @@
-class ApiPath {
-  static const String baseUrl = 'https://bwabank.tech/api';
-}
+String baseUrl = 'http://10.0.2.2:8000';
+

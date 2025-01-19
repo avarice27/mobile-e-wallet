@@ -15,12 +15,12 @@ class HomeTipsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        if (await canLaunch(tips.url!)) {
-          launch(tips.url!);
+        if (await canLaunchUrl(Uri.parse(tips.url!))) {
+          launchUrl(Uri.parse(tips.url!));
         }
       },
       child: Container(
-        width: 155,
+        width: 145,
         height: 176,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

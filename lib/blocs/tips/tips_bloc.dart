@@ -14,7 +14,7 @@ class TipsBloc extends Bloc<TipsEvent, TipsState> {
           emit(TipsLoading());
 
           final tips = await TipsService().getTips();
-
+          print(tips);
           emit(TipsSuccess(tips));
         } catch (e) {
           emit(TipsFailed(e.toString()));

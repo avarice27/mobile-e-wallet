@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class SignUpFormModel {
-  final String name;
+  final String? name;
   final String? email;
   final String? password;
   final String? pin;
@@ -34,7 +34,7 @@ class SignUpFormModel {
   }
 
   SignUpFormModel({
-    required this.name,
+    this.name,
     this.email,
     this.password,
     this.pin,
@@ -51,7 +51,7 @@ class SignUpFormModel {
       'password': password,
       'pin': pin,
       'profile_picture': profilePicture,
-      'ktp': ktp,
+      'ktp': ktp ?? "",
       'role_id': roleId.toString(),
       'nim': nim,
     };
@@ -65,15 +65,15 @@ class SignUpFormModel {
       pin: json['pin'] as String?,
       profilePicture: json['profile_picture'] as String?,
       ktp: json['ktp'] as String?,
-      roleId: json['role_id'],
+      roleId: int.parse(json['role_id'].toString()),
       nim: json['nim'] as String?,
     );
   }
 
   SignUpFormModel copyWith({
-    String? name,
-    String? email,
-    String? password,
+    // String? name,
+    // String? email,
+    // String? password,
     String? pin,
     String? profilePicture,
     String? ktp,
@@ -81,32 +81,16 @@ class SignUpFormModel {
     String? nim,
   }) =>
       SignUpFormModel(
-        name: name ?? this.name,
-        email: email ?? this.email,
-        password: password ?? this.password,
+        // name: name ?? this.name,
+        // email: email ?? this.email,
+        // password: password ?? this.password,
+        name: name,
+        email: email,
+        password: password,
         pin: pin ?? this.pin,
         profilePicture: profilePicture ?? this.profilePicture,
         ktp: ktp ?? this.ktp,
         roleId: roleId ?? this.roleId,
         nim: nim ?? this.nim,
       );
-
-  //auth
-  //     factory SignUpFormModel.fromJson(String str) =>
-  //     SignUpFormModel.fromMap(json.decode(str));
-
-  // String toJson() => json.encode(toMap());
-
-  // factory SignUpFormModel.fromMap(Map<String, dynamic> json) =>
-  //     SignUpFormModel(
-  //       email: json["email"],
-  //       password: json["password"],
-  //       nim: json["nim"],
-  //       name: json["name"],
-  //     );
-
-  // Map<String, dynamic> toMap() => {
-  //       "email": email,
-  //       "password": password,
-  //     };
 }

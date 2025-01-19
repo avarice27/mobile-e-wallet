@@ -26,10 +26,10 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    usernameController.text = widget.user.username!;
-    nameController.text = widget.user.name!;
-    emailController.text = widget.user.email!;
-    passwordController.text = widget.user.password!;
+    usernameController.text = widget.user.username ?? '';
+    nameController.text = widget.user.name ?? '';
+    emailController.text = widget.user.email ?? '';
+    passwordController.text = widget.user.password ?? '';
   }
 
   @override

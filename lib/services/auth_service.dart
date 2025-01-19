@@ -7,9 +7,9 @@ import 'package:bank_sha_rafi/models/user_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:dartz/dartz.dart';
-
+import 'package:bank_sha_rafi/shared/api_path.dart';
 class AuthService {
-  final String baseUrl = 'http://10.0.2.2:8000';
+  
 
   Future<bool> checkEmail(String email) async {
     try {
